@@ -60,7 +60,7 @@ export function GridSheetPassive({
   className,
   style,
   hub: initialHub,
-  panel_split=ture,
+  panel_split=true,
 }: PassiveProps) {
   const { sheetResize, showFormulaBar = true, mode = "light" } = options;
 
