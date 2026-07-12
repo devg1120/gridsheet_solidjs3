@@ -60,7 +60,7 @@ export function GridSheetPassive({
   className,
   style,
   hub: initialHub,
-  panel_split=true,
+  panel_split=false,
 }: PassiveProps) {
   const { sheetResize, showFormulaBar = true, mode = "light" } = options;
 
@@ -225,12 +225,12 @@ export function GridSheetPassive({
     console.log("mainRef", mainRef.offsetWidth)
     console.log("mainRef", mainRef.offsetHeight)
     
-    set_c11_width( mainRef.offsetWidth )
+    set_c11_width( mainRef.offsetWidth -2)
     set_c12_width( 0 )
     set_c21_width( mainRef.offsetWidth )
     set_c22_width( 0 )
 
-    set_c11_height( mainRef.offsetHeight )
+    set_c11_height( mainRef.offsetHeight -2)
     set_c12_height( mainRef.offsetHeight )
     set_c21_height( 0 )
     set_c22_height( 0 )
@@ -391,19 +391,13 @@ const h_resize = (id, size) => {
   </div>
 */}
 
-{/*
- <div 
-       ref={panelGroupRef}
-       style="height: 400px;  width:800px;"
-        >
-*/}
 
+<Show when={panel_split}>
  <div 
        ref={panelGroupRef}
        style="height: 100%;  width:100%;"
         >
 
-	<Show when={panel_split}>
               <PanelGroup  direction="column">
                    <Panel id="1" initialSize={100} onResize={(size) => v_resize("1", size)}>
                       <PanelGroup>
@@ -430,14 +424,11 @@ const h_resize = (id, size) => {
                    </Panel>
               </PanelGroup>
         
-	</Show>
-	<Show when={!panel_split}>
-              <Tabular sheetWidth={c11_width} sheetHeight={c11_height} gsid={gsid+"-A"}  />
-	</Show>
-	<Show when={false}>
-              <Tabular sheetWidth={c11_width} sheetHeight={c11_height} gsid={gsid+"-A"}  />
-	</Show>
 </div>
+</Show>
+<Show when={!panel_split}>
+              <Tabular sheetWidth={c11_width} sheetHeight={c11_height} gsid={gsid+"-A"}  />
+</Show>
 
 
 {/*

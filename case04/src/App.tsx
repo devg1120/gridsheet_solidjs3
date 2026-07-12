@@ -332,6 +332,7 @@ const App = () => {
       <div class="grid-container" style="height: 650px;  width:1400px;">
         <GridSheetPassive
 	  gsid="TABLE-01"
+	  panel_split={true}
 	  syncScroll={syncScroll}
 	  key={keyA}
           hub={hub}
