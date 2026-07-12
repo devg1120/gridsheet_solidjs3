@@ -1,0 +1,11 @@
+case02
+  - App.tsx
+            <div class="grid-container" style="height: 650px;  width:1400px;">
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  - GridSheetPassive.tsx
+        <div
+          class={`gs-main ${className || ""}`}
+          ref={mainRef}
+
+          style="height: calc(100% - 25px) ;  width:100%;"         //MAIN SIZE
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
