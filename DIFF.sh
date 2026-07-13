@@ -1,6 +1,6 @@
 
-D1=case21_solid11-3/react-core/src
-D2=case21_solid11-4/react-core/src
+D1=case03/gridsheet/src
+D2=case04/gridsheet/src/
 #D1=case21/react-core/src/components
 #D2=case21_/react-core/src/components
 

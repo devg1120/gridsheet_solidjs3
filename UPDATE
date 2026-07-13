@@ -14,4 +14,6 @@ case02
 case02
 # sheet init-split-size zero 
 
+case05
+   split /none   TOGGLE SWITCH
 
