@@ -1,30 +1,17 @@
 
-D1=case01/gridsheet/src
-D2=case05/gridsheet/src
-F=""
+#D1=case01/gridsheet/src
+#D2=case05/gridsheet/src
+#F=""
 
-#D1=case03/gridsheet/src/components
-#D2=case05/gridsheet/src/components
-#F=GridSheetPassive.tsx
+D1=case03/gridsheet/src/components
+D2=case05/gridsheet/src/components
+F=GridSheetPassive.tsx
 
 
 #MODE=2   # all line
 MODE=1   # supress common lines
 
-#F=$1
-#TARGET="${F}|"
-#
-#params="type:const:table"
-#KEYS=(${params//:/ })
-#SER_OP=""
-#for item in "${KEYS[@]}" ; do
-#    SER_OP="${SER_OP} -p ${item}"
-#done
-#echo $SER_OP
-
-#LESS_SOP=" -p use"
 LESS_BASE="less -R -S "
-#LESS=${LESS_BASE}" "${LESS_SOP}
 LESS=${LESS_BASE}
 
 echo $LESS
@@ -35,7 +22,6 @@ diff1() {
 
 echo  "DIFF "  "${D1}/${F} "    ${D2}/${F}
 
-#diff -r -Bw --side-by-side $D2/$F $D1/$F
 diff -r -Bw --side-by-side --suppress-common-lines $D1/$F $D2/$F
 
 ) | expand -t 8 | awk -v TARGET=$TARGET '
@@ -45,13 +31,21 @@ function basename(file) {
     return file
 }
 
+function str_repeat(str, n, result) {
+    for (i = 1; i <= n; i++) result = result str
+    return result
+}
+
 BEGIN { PSEQ = 0 }
 {
    if( $1 == "diff" ) {
-     print ""
-     print "\033[1;32m"  $6 "               " $7  "\033[0m"
-     print ""
      TARGET = basename($6)"|"
+     L = length($6)
+     T = length(TARGET)
+     SPC = str_repeat(" ", 64 - L + T)
+     print ""
+     print "\033[1;32m"  $6 SPC $7  "\033[0m"
+     print ""
 
    } else if( $1 == "DIFF" ) {
      print $0 
@@ -79,7 +73,6 @@ diff2() {
 
 echo  "DIFF "  "${D1}/${F} "    ${D2}/${F}
 diff -r -Bw --side-by-side $D1/$F $D2/$F
-#diff -r -Bw --side-by-side --suppress-common-lines $D2/$F $D1/$F
 
 ) | expand -t 8 | awk -v TARGET=$TARGET '
 
@@ -88,13 +81,21 @@ function basename(file) {
     return file
 }
 
+function str_repeat(str, n, result) {
+    for (i = 1; i <= n; i++) result = result str
+    return result
+}
+
 BEGIN { PSEQ = 0 }
 {
    if( $1 == "diff" ) {
-     print ""
-     print "\033[1;32m"  $5 "               " $6  "\033[0m"
-     print ""
      TARGET = basename($5)"|"
+     L = length($5) 
+     T = length(TARGET)
+     SPC = str_repeat(" ", 64 - L + T)
+     print ""
+     print "\033[1;32m"  $5 SPC $6  "\033[0m"
+     print ""
 
    } else if( $1 == "DIFF" ) {
      print $0 
