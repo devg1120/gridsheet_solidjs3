@@ -1,31 +1,26 @@
 
-D1=case01/gridsheet/src
+D1=case03/gridsheet/src
 D2=case05/gridsheet/src
-F=""
+#D1=case21/react-core/src/components
+#D2=case21_/react-core/src/components
 
-#D1=case03/gridsheet/src/components
-#D2=case05/gridsheet/src/components
-#F=GridSheetPassive.tsx
+MODE=2   # all line
+#MODE=1   # supress common lines
 
+F=$1
+TARGET="${F}|"
 
-#MODE=2   # all line
-MODE=1   # supress common lines
+params="type:const:table"
+KEYS=(${params//:/ })
+SER_OP=""
+for item in "${KEYS[@]}" ; do
+    SER_OP="${SER_OP} -p ${item}"
+done
+echo $SER_OP
 
-#F=$1
-#TARGET="${F}|"
-#
-#params="type:const:table"
-#KEYS=(${params//:/ })
-#SER_OP=""
-#for item in "${KEYS[@]}" ; do
-#    SER_OP="${SER_OP} -p ${item}"
-#done
-#echo $SER_OP
-
-#LESS_SOP=" -p use"
+LESS_SOP=" -p use"
 LESS_BASE="less -R -S "
-#LESS=${LESS_BASE}" "${LESS_SOP}
-LESS=${LESS_BASE}
+LESS=${LESS_BASE}" "${LESS_SOP}
 
 echo $LESS
 
