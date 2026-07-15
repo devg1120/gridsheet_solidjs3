@@ -1,11 +1,11 @@
 
-#D1=case01/gridsheet/src
-#D2=case05/gridsheet/src
-#F=""
+D1=case01/gridsheet/src
+D2=case05/gridsheet/src
+F=""
 
-D1=case03/gridsheet/src/components
-D2=case05/gridsheet/src/components
-F=GridSheetPassive.tsx
+#D1=case03/gridsheet/src/components
+#D2=case05/gridsheet/src/components
+#F=GridSheetPassive.tsx
 
 
 #MODE=2   # all line

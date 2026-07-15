@@ -1,28 +1,38 @@
+# ref
+# https://www.tohoho-web.com/linux/cmd/diff.html
+#
 
-#D1=case01/gridsheet/src
-#D2=case05/gridsheet/src
-#F=""
+D1=case01/gridsheet/src
+D2=case05/gridsheet/src
+F=""
 
-D1=case03/gridsheet/src/components
-D2=case05/gridsheet/src/components
-F=GridSheetPassive.tsx
+#D1=case03/gridsheet/src/components
+#D2=case05/gridsheet/src/components
+#F=GridSheetPassive.tsx
 
 
-#MODE=2   # all line
-MODE=1   # supress common lines
+#MODE=1   # -y side-by-side supress common lines
+#MODE=2   # -y side-by-side all line
+#MODE=3   # -c context 
+#MODE=4   # -u unified
+
+MODE=1
+
+
+
 
 LESS_BASE="less -R -S "
 LESS=${LESS_BASE}
 
-echo $LESS
+#echo $LESS
 
 diff1() {
 
 (
 
-echo  "DIFF "  "${D1}/${F} "    ${D2}/${F}
+echo  "DIFF -y supress "  "${D1}/${F} "    ${D2}/${F}
 
-diff -r -Bw --side-by-side --suppress-common-lines $D1/$F $D2/$F
+diff -r -Bw -y --suppress-common-lines  $D1/$F $D2/$F
 
 ) | expand -t 8 | awk -v TARGET=$TARGET '
 
@@ -71,8 +81,8 @@ BEGIN { PSEQ = 0 }
 diff2() {
 (
 
-echo  "DIFF "  "${D1}/${F} "    ${D2}/${F}
-diff -r -Bw --side-by-side $D1/$F $D2/$F
+echo  "DIFF -y allline "  "${D1}/${F} "    ${D2}/${F}
+diff -r -Bw -y $D1/$F $D2/$F
 
 ) | expand -t 8 | awk -v TARGET=$TARGET '
 
@@ -118,7 +128,156 @@ BEGIN { PSEQ = 0 }
 
 }
 
+diff2L() {
+(
 
+echo  "DIFF -y allline left "  "${D1}/${F} "    ${D2}/${F}
+diff -r -Bw -y --left-column $D1/$F $D2/$F
+
+) | expand -t 8 | awk -v TARGET=$TARGET '
+
+function basename(file) {
+    sub(".*/", "", file)
+    return file
+}
+
+function str_repeat(str, n, result) {
+    for (i = 1; i <= n; i++) result = result str
+    return result
+}
+
+BEGIN { PSEQ = 0 }
+{
+   if( $1 == "diff" ) {
+     TARGET = basename($6)"|"
+     L = length($6) 
+     T = length(TARGET)
+     SPC = str_repeat(" ", 64 - L + T)
+     print ""
+     print "\033[1;32m"  $6 SPC $7  "\033[0m"
+     print ""
+
+   } else if( $1 == "DIFF" ) {
+     print $0 
+     print ""
+   } else {
+
+        F = substr($0,63,1);
+        if( F == ">" ){
+          print TARGET "\033[1;33m"  $0    "\033[0m"
+        } else if ( F == "<" ) {
+          print TARGET "\033[1;34m"  $0    "\033[0m"
+        } else if ( F == "|" ) {
+          print TARGET "\033[1;36m"  $0    "\033[0m"
+        } else {
+          print TARGET $0
+        }
+   }
+}
+'  | `eval echo $LESS`
+
+}
+
+
+diff3() {
+(
+
+echo  "DIFF -c "  "${D1}/${F} "    ${D2}/${F}
+diff -r -Bw  -c --color=always $D1/$F $D2/$F
+
+) | expand -t 8 | awk -v TARGET=$TARGET '
+
+function basename(file) {
+    sub(".*/", "", file)
+    return file
+}
+
+function str_repeat(str, n, result) {
+    for (i = 1; i <= n; i++) result = result str
+    return result
+}
+
+BEGIN { PSEQ = 0 }
+{
+   if( $1 == "diff" ) {
+     TARGET = basename($6)"|"
+     L = length($6) 
+     T = length(TARGET)
+     SPC = str_repeat(" ", 64 - L + T)
+     print ""
+     print "\033[1;32m"  $6 SPC $7  "\033[0m"
+     print ""
+
+   } else if( $1 == "DIFF" ) {
+     print $0 
+     print ""
+   } else {
+
+        F = substr($0,63,1);
+        if( F == ">" ){
+          print TARGET "\033[1;33m"  $0    "\033[0m"
+        } else if ( F == "<" ) {
+          print TARGET "\033[1;34m"  $0    "\033[0m"
+        } else if ( F == "|" ) {
+          print TARGET "\033[1;36m"  $0    "\033[0m"
+        } else {
+          print TARGET $0
+        }
+   }
+}
+'  | `eval echo $LESS`
+
+}
+
+diff4() {
+(
+
+echo  "DIFF -u "  "${D1}/${F} "    ${D2}/${F}
+diff -r -Bw -u --color=always $D1/$F $D2/$F
+
+) | expand -t 8 | awk -v TARGET=$TARGET '
+
+function basename(file) {
+    sub(".*/", "", file)
+    return file
+}
+
+function str_repeat(str, n, result) {
+    for (i = 1; i <= n; i++) result = result str
+    return result
+}
+
+BEGIN { PSEQ = 0 }
+{
+   if( $1 == "diff" ) {
+     TARGET = basename($6)"|"
+     L = length($6) 
+     T = length(TARGET)
+     SPC = str_repeat(" ", 64 - L + T)
+     print ""
+     print "\033[1;32m"  $6 SPC $7  "\033[0m"
+     print ""
+
+   } else if( $1 == "DIFF" ) {
+     print $0 
+     print ""
+   } else {
+
+        F = substr($0,63,1);
+        if( F == ">" ){
+          print TARGET "\033[1;33m"  $0    "\033[0m"
+        } else if ( F == "<" ) {
+          print TARGET "\033[1;34m"  $0    "\033[0m"
+        } else if ( F == "|" ) {
+          print TARGET "\033[1;36m"  $0    "\033[0m"
+        } else {
+          print TARGET $0
+        }
+   }
+}
+'  | `eval echo $LESS`
+
+}
 #diff1 $*
 
 case "$MODE" in
@@ -127,6 +286,15 @@ case "$MODE" in
     ;;
   "2")
     diff2 $*
+    ;;
+  "2L")
+    diff2L $*
+    ;;
+  "3")
+    diff3 $*
+    ;;
+  "4")
+    diff4 $*
     ;;
   *)
     echo ""
