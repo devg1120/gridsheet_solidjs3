@@ -1,0 +1,22 @@
+$ diff -u  --color Tabular.tsx Tabular.tsx.org  
+--- Tabular.tsx	2026-07-16 22:06:50.621197608 +0900
++++ Tabular.tsx.org	2026-07-16 22:06:00.825270516 +0900
+@@ -166,7 +166,7 @@
+     */
+ 
+     setVirtualized(virtualize(table, tabularRef));
+-    //setTableKey([{}]);
++    setTableKey([{}]);
+   };
+ 
+   const handleSelectAllClick = () => {
+@@ -684,7 +684,7 @@
+         onMouseMove={handleMouseMove}
+         onScroll={handleScroll}
+         onPointerDown={handlePointerDown}
+-        //onWheel={handleWheel}
++        onWheel={handleWheel}
+         onFocus={handleFocus}
+         onBlur={handleBlur}
+         onKeyDown={handleKeyDown}
+
