@@ -166,7 +166,7 @@ export function Tabular({
     */
 
     setVirtualized(virtualize(table, tabularRef));
-    //setTableKey([{}]);
+    setTableKey([{}]);
   };
 
   const handleSelectAllClick = () => {
@@ -684,7 +684,7 @@ export function Tabular({
         onMouseMove={handleMouseMove}
         onScroll={handleScroll}
         onPointerDown={handlePointerDown}
-        //onWheel={handleWheel}
+        onWheel={handleWheel}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
