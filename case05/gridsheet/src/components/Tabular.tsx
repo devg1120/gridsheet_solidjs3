@@ -166,7 +166,7 @@ export function Tabular({
     */
 
     setVirtualized(virtualize(table, tabularRef));
-    //setTableKey([{}]);
+    setTableKey([{}]);
   };
 
   const handleSelectAllClick = () => {

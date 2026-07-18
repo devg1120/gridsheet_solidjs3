@@ -323,22 +323,11 @@ const App = () => {
   //console.log(cells["F12"]);
 
   //style={{ width: 800 }}
-  
-  //const [key, setKey] = createSignal([{}]);
-
-  const [panel_split, set_panel_split] = createSignal(false);
-  function panel_split_toggle() {
-      //console.log("panel_split_toggle");
-      set_panel_split(!panel_split());
-      console.log("panel_split_toggle", panel_split());
-      //setKey([{}]);
-  }
 
   return (
     <main>
       <br />
       <br />
-      <button onClick={() => panel_split_toggle()}>PANEL SPLIT</button>
 
       <div class="grid-container" style="height: 650px;  width:1400px;">
         <GridSheetPassive
@@ -348,9 +337,36 @@ const App = () => {
 	  key={keyA}
           hub={hub}
           table={table()}
+/*
+          options={{
+            sheetHeight: 400,
+            sheetWidth: 400,
+          }}
+	*/  
+          //sheetName="Sheet1"
           sheetName={sheetName}
+          //style={{ width: 800, height: 300 }}
+          //
         />
         <br />
+{/*       
+                <GridSheetPassive
+	            gsid="TABLE-B"
+	  syncScroll={syncScroll}
+	  key={keyB}
+                    hub={hub}
+                    table={table()}
+                    //initialCells={ cells }
+                    options={
+                        {}
+                    }
+                    sheetName="Sheet1"
+                //style={{ width: 800, height: 300 }}
+                />
+
+
+        <br />
+*/}
       </div>
 
       <div class="labeler-control">
