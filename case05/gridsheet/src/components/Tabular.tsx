@@ -41,7 +41,7 @@ export function Tabular({
   const [palette, setPalette] = createSignal<RefPaletteType>({});
   const { store, dispatch } = useContext(Context);
 
-  const [focus, setFocus] = createSignal(false);
+  //const [focus, setFocus] = createSignal(false);
 
   let {
     tableReactive,
@@ -257,7 +257,10 @@ export function Tabular({
     dispatch(setStore({ tabularRef: tabularRef }));
     setVirtualized(virtualize(table, tabularRef));
     tabularRef.focus();
-    tabularRef.focus();
+    //if (init_focus == true) {
+    //  tabularRef.focus();
+    //}
+
   });
 
   /*
@@ -668,7 +671,7 @@ export function Tabular({
           height: sheetHeight() + "px",
 	  /*"border-top": "solid 2px #00ff80",*/
 	  /* "border-top": focus() ? "solid 2px #00ff80" : "solid 2px #FFFFFF" , */
-	  "border-top": focus() ? "solid 2px orange" : "solid 2px #FFFFFF" ,
+	  /*"border-top": focus() ? "solid 2px orange" : "solid 2px #FFFFFF" ,*/
 	  /*"outline-color": "orange",*/
 	  /*"outline-style": "solid",*/
 	  /*"outline-width": "2px",*/
@@ -685,7 +688,7 @@ export function Tabular({
         onScroll={handleScroll}
         onPointerDown={handlePointerDown}
         //onWheel={handleWheel}
-        onFocus={handleFocus}
+        //onFocus={handleFocus}
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
         onKeyUp={handleKeyUp}
@@ -707,7 +710,7 @@ export function Tabular({
                 tabindex="0"
                 onKeyDown={handleKeyDown}
                 //onMouseDown={handleDragStart} //NEW
-                onFocus={handleFocus}
+                //onFocus={handleFocus}
               >
                 <thead class="gs-thead" style={{ height: table.headerHeight }}>
                   <tr class="gs-row">

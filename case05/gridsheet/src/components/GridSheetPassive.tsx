@@ -217,9 +217,11 @@ export function GridSheetPassive({
   const [c22_width,  set_c22_width ] = createSignal(400);
   const [c22_height, set_c22_height] = createSignal(200);
 
+  let focusRef ;
+
   onMount(() => {
     setMount(true);
-    embedStyle();
+    embedStyle(); 
     dispatch(setStore({ mainRef: mainRef }));
     setLoading(false);
     console.log("mainRef", mainRef.offsetWidth)
@@ -234,6 +236,22 @@ export function GridSheetPassive({
     set_c12_height( mainRef.offsetHeight )
     set_c21_height( 0 )
     set_c22_height( 0 )
+ console.log(gsid)
+
+ //console.log(document.getElementById(gsid+"-A"));
+ //console.log(mainRef.querySelector("#11"));
+ //console.log(document.querySelector("#" + gsid + "-A"));
+ //console.log(mainRef.querySelector("#" + gsid + "-A"));
+ //console.log(mainRef.querySelector("#init_focus"));
+ //console.log(document.getElementById("init_focus"));
+ //console.log(document.getElementById(gsid+"-A"));
+
+ //document.querySelector("p11").focus()
+ //document.getElementById(gsid+"-A").focus();
+ //mainRef.focus();
+ //panelGroupRef.focus();
+
+
   });
 
 
@@ -402,7 +420,7 @@ const h_resize = (id, size) => {
                    <Panel id="1" initialSize={100} onResize={(size) => v_resize("1", size)}>
                       <PanelGroup>
                         <Panel id="11" initialSize={100} onResize={(size) => h_resize("11", size)}>
-                            <Tabular sheetWidth={c11_width} sheetHeight={c11_height} gsid={gsid+"-A"}  />
+                            <Tabular  sheetWidth={c11_width} sheetHeight={c11_height} gsid={gsid+"-A"}  />
 			</Panel>
                         <ResizeHandle />
                         <Panel id="12" initialSize={0} onResize={(size) => h_resize("12", size)}>
@@ -414,11 +432,11 @@ const h_resize = (id, size) => {
                    <Panel id="2" initialSize={0}  onResize={(size) => v_resize("2", size)}>
                       <PanelGroup>
                         <Panel id="21" initialSize={100} onResize={(size) => h_resize("21", size)}>
-                            <Tabular sheetWidth={c21_width} sheetHeight={c21_height} gsid={gsid+"-C"}  />
+                            <Tabular  sheetWidth={c21_width} sheetHeight={c21_height} gsid={gsid+"-C"}  />
 			</Panel>
                         <ResizeHandle />
                         <Panel id="22" initialSize={0} onResize={(size) => h_resize("22", size)}>
-                            <Tabular sheetWidth={c22_width} sheetHeight={c22_height} gsid={gsid+"-D"}  />
+                            <Tabular  sheetWidth={c22_width} sheetHeight={c22_height} gsid={gsid+"-D"}  />
 			</Panel>
                       </PanelGroup>
                    </Panel>

@@ -14,8 +14,8 @@ export const HEADER_WIDTH = 50;
 export const MIN_WIDTH = 5;
 export const MIN_HEIGHT = 5;
 
-export const OVERSCAN_X = 10;
-export const OVERSCAN_Y = 100;
+export const OVERSCAN_X = 5;
+export const OVERSCAN_Y = 16;
 
 export const DEFAULT_ALPHABET_CACHE_SIZE = 1000;
 
