@@ -333,7 +333,10 @@ const App = () => {
 
   let  split_ratio = [50, 40, 100]
   //let  split_ratio = [100, 100, 100]
-
+/*
+      <div class="grid-container" style="height: 650px;  width:1400px;">
+      <div class="grid-container" style="height: 100vh;  width:100vw;">
+*/
   return (
     <main>
       <br />
@@ -345,7 +348,7 @@ const App = () => {
 
       <div class="grid-container" style="height: 650px;  width:1400px;">
         <GridSheetPassive
-	  gsid="TABLE-01"
+	  table_name="TABLE-01"
 	  panel_split={true}
           split_ratio={split_ratio}
 	  syncScroll={syncScroll}

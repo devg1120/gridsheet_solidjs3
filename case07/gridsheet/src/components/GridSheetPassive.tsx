@@ -50,7 +50,7 @@ import "./lib/styles.css";
 
 export function GridSheetPassive({
   //initialCells,
-  gsid = "ABC",
+  table_name = "ABC",
   key,
   globalSyncScroll = null,
   table, //GUSA
@@ -277,6 +277,11 @@ export function GridSheetPassive({
   //let split_ratio = [50, 50, 50]
   
 let r = []
+let eleA = null
+let eleB = null
+let eleC = null
+let eleD = null
+
 if (panel_split) {
   // panel split
    r = [split_ratio[0],
@@ -301,6 +306,12 @@ if (panel_split) {
     set_c12_height( mainRef.offsetHeight*(r[0]/100) )
     set_c21_height( mainRef.offsetHeight*(r[2]/100) )
     set_c22_height( mainRef.offsetHeight*(r[2]/100) )
+
+    eleA = document.querySelector("#" + table_name + "-A" + "_Tabular");
+    eleB = document.querySelector("#" + table_name + "-B" + "_Tabular");
+    eleC = document.querySelector("#" + table_name + "-C" + "_Tabular");
+    eleD = document.querySelector("#" + table_name + "-D" + "_Tabular");
+
   });
 } else {
   // not panel split
@@ -369,7 +380,23 @@ const h_resize = (id, size) => {
 }
 
   const syncScroll = (gsid, ele, top, left) => {
-       console.log("syncScroll:", gsid, top, left);
+      if (!panel_split) return;
+
+      //console.log("syncScroll:", gsid, top, left);
+      if ( gsid == table_name + "-A" ) {
+          //console.log("A")
+              const el = document.querySelector("#" + table_name + "-B" + "_Tabular");
+              //el.scrollTo(left, top)
+              el.scrollTop = top
+              //eleB.scrollTop = top
+      } else if ( gsid == table_name + "-B" ) {
+          //console.log("B")
+              const el = document.querySelector("#" + table_name + "-A" + "_Tabular");
+              //el.scrollTo(left, top)
+              el.scrollTop = top
+              //eleA.scrollTop = top
+      }
+
 /*
        console.log("syncScroll:", gsid, ele, top, left);
       if ( gsid == "TABLE-A" ) {
@@ -534,11 +561,11 @@ const h_resize = (id, size) => {
                    <Panel id="1" initialSize={r[0]} onResize={(size) => v_resize("1", size)}>
                       <PanelGroup>
                         <Panel id="11" initialSize={r[1][0]} onResize={(size) => h_resize("11", size)}>
-                            <Tabular  sheetWidth={c11_width} sheetHeight={c11_height} gsid={gsid+"-A"}  syncScroll={syncScroll} />
+                            <Tabular  sheetWidth={c11_width} sheetHeight={c11_height} gsid={table_name+"-A"}  syncScroll={syncScroll} />
 			</Panel>
                         <ResizeHandle />
                         <Panel id="12" initialSize={r[1][1]} onResize={(size) => h_resize("12", size)}>
-                            <Tabular sheetWidth={c12_width} sheetHeight={c12_height} gsid={gsid+"-B"}  syncScroll={syncScroll} />
+                            <Tabular sheetWidth={c12_width} sheetHeight={c12_height} gsid={table_name+"-B"}  syncScroll={syncScroll} />
 			</Panel>
                       </PanelGroup>
                    </Panel>
@@ -546,11 +573,11 @@ const h_resize = (id, size) => {
                    <Panel id="2" initialSize={r[2]}  onResize={(size) => v_resize("2", size)}>
                       <PanelGroup>
                         <Panel id="21" initialSize={r[3][0]} onResize={(size) => h_resize("21", size)}>
-                            <Tabular  sheetWidth={c21_width} sheetHeight={c21_height} gsid={gsid+"-C"} syncScroll={syncScroll} />
+                            <Tabular  sheetWidth={c21_width} sheetHeight={c21_height} gsid={table_name+"-C"} syncScroll={syncScroll} />
 			</Panel>
                         <ResizeHandle />
                         <Panel id="22" initialSize={r[3][1]} onResize={(size) => h_resize("22", size)}>
-                            <Tabular  sheetWidth={c22_width} sheetHeight={c22_height} gsid={gsid+"-D"} syncScroll={syncScroll} />
+                            <Tabular  sheetWidth={c22_width} sheetHeight={c22_height} gsid={table_name+"-D"} syncScroll={syncScroll} />
 			</Panel>
                       </PanelGroup>
                    </Panel>
@@ -559,7 +586,7 @@ const h_resize = (id, size) => {
 </div>
 </Show>
 <Show when={!panel_split}>
-              <Tabular sheetWidth={c11_width} sheetHeight={c11_height} gsid={gsid+"-A"}  />
+              <Tabular sheetWidth={c11_width} sheetHeight={c11_height} gsid={table_name+"-A"}  />
 </Show>
 
 
