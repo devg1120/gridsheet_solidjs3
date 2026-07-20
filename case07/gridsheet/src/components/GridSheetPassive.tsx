@@ -385,10 +385,12 @@ const h_resize = (id, size) => {
       //console.log("syncScroll:", gsid, top, left);
       if ( gsid == table_name + "-A" ) {
           //console.log("A")
-              const el = document.querySelector("#" + table_name + "-B" + "_Tabular");
+              const elB = document.querySelector("#" + table_name + "-B" + "_Tabular");
               //el.scrollTo(left, top)
-              el.scrollTop = top
+              elB.scrollTop = top
               //eleB.scrollTop = top
+              const elC = document.querySelector("#" + table_name + "-C" + "_Tabular");
+              elC.scrollLeft =left
       } else if ( gsid == table_name + "-B" ) {
           //console.log("B")
               const el = document.querySelector("#" + table_name + "-A" + "_Tabular");
