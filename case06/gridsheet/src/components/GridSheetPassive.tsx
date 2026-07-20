@@ -275,9 +275,11 @@ export function GridSheetPassive({
 
   //let split_ratio = [70, 70, 40]
   //let split_ratio = [50, 50, 50]
-  //let split_ratio = [100, 100, 100]
-
-  let r = [split_ratio[0],
+  
+let r = []
+if (panel_split) {
+  // panel split
+   r = [split_ratio[0],
               [split_ratio[1], 100 - split_ratio[1]],
 	   100 - split_ratio[0],
               [split_ratio[2], 100 - split_ratio[2]],
@@ -300,6 +302,30 @@ export function GridSheetPassive({
     set_c21_height( mainRef.offsetHeight*(r[2]/100) )
     set_c22_height( mainRef.offsetHeight*(r[2]/100) )
   });
+} else {
+  // not panel split
+  onMount(() => {
+    setMount(true);
+    embedStyle(); 
+    dispatch(setStore({ mainRef: mainRef }));
+    setLoading(false);
+    console.log("mainRef", mainRef.offsetWidth)
+    console.log("mainRef", mainRef.offsetHeight)
+    
+    set_c11_width( mainRef.offsetWidth -2)
+    //set_c12_width( 0 )
+    //set_c21_width( mainRef.offsetWidth )
+    //set_c22_width( 0 )
+
+    set_c11_height( mainRef.offsetHeight -2)
+    //set_c12_height( mainRef.offsetHeight )
+    //set_c21_height( 0 )
+    //set_c22_height( 0 )
+
+
+  });
+
+}
 
 
   //const [sheetHeight, setSheetHeight] = createSignal( options?.sheetHeight || 400);

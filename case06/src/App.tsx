@@ -332,6 +332,7 @@ const App = () => {
   }
 
   let  split_ratio = [50, 40, 100]
+  //let  split_ratio = [100, 100, 100]
 
   return (
     <main>
