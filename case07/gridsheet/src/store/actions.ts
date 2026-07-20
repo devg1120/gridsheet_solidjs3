@@ -743,10 +743,11 @@ class ArrowAction<
     deltaX: number;
     numRows: number;
     numCols: number;
+    gsid: string;
   },
 > extends CoreAction<T> {
   reduce(store: StoreType, payload: T): StoreWithCallback {
-    let { shiftKey, deltaY, deltaX, numRows, numCols } = payload;
+    let { shiftKey, deltaY, deltaX, numRows, numCols, gsid, ref } = payload;
     const { choosing, tableReactive: tableRef, tabularRef } = store;
 
     const table = tableRef;
@@ -1144,8 +1145,10 @@ class ArrowAction<
     const cell = table.getCellByPoint({ y: nextY, x: nextX }, "SYSTEM");
     height = cell?.height || DEFAULT_HEIGHT;
     width = cell?.width || DEFAULT_WIDTH;
-
-    smartScroll(table, tabularRef, { y: nextY, x: nextX });
+    console.trace("smartScroll");
+    console.log("gsid", gsid);
+    //smartScroll(table, tabularRef, { y: nextY, x: nextX });   //GUSA
+    smartScroll(table, ref, { y: nextY, x: nextX });  //GUSA
     return {
       ...store,
       selectingZone: { startY: -1, startX: -1, endY: -1, endX: -1 },

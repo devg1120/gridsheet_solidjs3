@@ -107,7 +107,7 @@ export function Tabular({
   createEffect(() => {
     //console.log("store update");
     table = store().tableReactive;
-    setTableKey([{}]);
+    //setTableKey([{}]);
   });
 
   let table = tableReactive;
@@ -122,27 +122,27 @@ export function Tabular({
     e.preventDefault();
     e.stopPropagation();
   };
-
+/*
   const handleWheel = (e: WheelEvent) => {
     //console.log("wheel");
     //e.preventDefault(); // Prevents the default page scroll
     //e.stopPropagation();
-    /*
-     if(e.shiftKey){
-         tabularRef.scrollTo({left:tabularRef.scrollLeft + e.deltaY })
+    
+    // if(e.shiftKey){
+    //     tabularRef.scrollTo({left:tabularRef.scrollLeft + e.deltaY })
 
-     } else {
-         tabularRef.scrollTo({top:tabularRef.scrollTop + e.deltaY })
+    // } else {
+    //     tabularRef.scrollTo({top:tabularRef.scrollTop + e.deltaY })
 
-     }
-    */
+    // }
+    
 
     //setVirtualized(virtualize(table, e.currentTarget));
 
     setVirtualized(virtualize(table, tabularRef));
     setTableKey([{}]);
   };
-
+*/
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     //console.log("scroll",e.srcElement)
     //console.log("scroll",gsid, e.srcElement.scrollTop, e.srcElement.scrollLeft)
@@ -570,6 +570,8 @@ export function Tabular({
             numCols: table.getNumCols(),
             deltaY: 0,
             deltaX: -1,
+	    gsid:gsid,
+	    ref: tabularRef,
           }),
         );
         //setVirtualized(virtualize(table, tabularRef));
@@ -584,6 +586,8 @@ export function Tabular({
             numCols: table.getNumCols(),
             deltaY: 0,
             deltaX: 1,
+	    gsid:gsid,
+	    ref: tabularRef,
           }),
         );
         //return false;
@@ -598,6 +602,8 @@ export function Tabular({
             numCols: table.getNumCols(),
             deltaY: -1,
             deltaX: 0,
+	    gsid:gsid,
+	    ref: tabularRef,
           }),
         );
         //return false;
@@ -612,6 +618,8 @@ export function Tabular({
             numCols: table.getNumCols(),
             deltaY: 1,
             deltaX: 0,
+	    gsid:gsid,
+	    ref: tabularRef,
           }),
         );
         //return false;
