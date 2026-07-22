@@ -20,4 +20,6 @@ case05
 case07
    scroll sync
 
-
+case07
+   Tabular.tsx   up down over flox => FIX
+   GridSheetPassive.tsx  =>  ScrollHandle  delete
