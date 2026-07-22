@@ -1,6 +1,6 @@
 
-D1=case01/gridsheet/src
-D2=case05/gridsheet/src
+D1=case07/gridsheet/src
+D2=case08/gridsheet/src
 F=""
 
 #D1=case03/gridsheet/src/components

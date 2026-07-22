@@ -17,3 +17,7 @@ case02
 case05
    split /none   TOGGLE SWITCH
 
+case07
+   scroll sync
+
+
