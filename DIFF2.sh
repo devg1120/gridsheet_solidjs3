@@ -2,8 +2,8 @@
 # https://www.tohoho-web.com/linux/cmd/diff.html
 #
 
-D1=case04/gridsheet/src
-D2=case05/gridsheet/src
+D1=case08/gridsheet/src
+D2=case09/gridsheet/src
 F=""
 
 #D1=case04/gridsheet/src/components
@@ -16,7 +16,7 @@ F=""
 #MODE=3   # -c context 
 #MODE=4   # -u unified
 
-MODE=1
+MODE=4
 
 
 
