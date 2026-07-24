@@ -31,7 +31,7 @@ export const getCellRectPositions = (table: Table, { y, x }: PointType) => {
 };
 
 export const getScreenRect = (e: HTMLDivElement) => {
-	console.log(e)
+//	console.log(e)
   const top = e.scrollTop,
     left = e.scrollLeft;
   const height = e.offsetHeight,
@@ -151,7 +151,7 @@ export const smartScroll = (
   if (e == null) {
     return;
   }
-  console.log("smartScroll" );
+  //console.log("smartScroll" );
   const screen = getScreenRect(e);
   const target = getCellRectPositions(table, targetPoint);
   //console.log("screen", screen)

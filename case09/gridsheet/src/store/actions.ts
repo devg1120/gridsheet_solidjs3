@@ -1145,8 +1145,8 @@ class ArrowAction<
     const cell = table.getCellByPoint({ y: nextY, x: nextX }, "SYSTEM");
     height = cell?.height || DEFAULT_HEIGHT;
     width = cell?.width || DEFAULT_WIDTH;
-    console.trace("smartScroll");
-    console.log("gsid", gsid);
+    //console.trace("smartScroll");
+    //console.log("gsid", gsid);
     //smartScroll(table, tabularRef, { y: nextY, x: nextX });   //GUSA
     smartScroll(table, ref, { y: nextY, x: nextX });  //GUSA
     return {

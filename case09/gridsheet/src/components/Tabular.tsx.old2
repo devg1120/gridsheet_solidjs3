@@ -84,14 +84,13 @@ export function Tabular({
 
   createEffect(() => {
     //console.log("choosing...");
-    //setChoosing(store().choosing);
+    setChoosing(store().choosing);
     operationStyles = useOperationStyles(store, {
       ...palette(),
       ...table.wire.paletteBySheetName[table.sheetName],
     });
 
-    //setKey([{}]);
-    setTableKey([{}]);
+    setKey([{}]);
   });
 
   createEffect(() => {
@@ -104,13 +103,13 @@ export function Tabular({
     setVirtualized(virtualize(table, tabularRef));
     //setTableKey([{}]);
   });
-/*
+
   createEffect(() => {
     //console.log("store update");
     table = store().tableReactive;
     setTableKey([{}]);
   });
-*/
+
   let table = tableReactive;
 
   let tableRef = null;
@@ -653,7 +652,7 @@ export function Tabular({
   let pointerDown = false;
 
   const handlePointerDown = (event: PointerEvent) => {
-     //console.log("handlePointerDown", gsid);
+     console.log("handlePointerDown", gsid);
     //dispatch(setStore({ tabularRef: tabularRef }));  //Tabular change
     tabularRef.focus();
     pointerDown = true;
@@ -814,6 +813,8 @@ export function Tabular({
                             }
 
                             return (
+                              <For each={key()}>
+                                {() => (
                                   <Cell
                                     y={y}
                                     x={x}
@@ -831,6 +832,8 @@ export function Tabular({
                                       ]
                                     }
                                   />
+                                )}
+                              </For>
                             );
                           }}
                         </For>
