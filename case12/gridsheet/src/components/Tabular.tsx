@@ -68,8 +68,8 @@ export function Tabular({
 
   const handleFocus = (e: React.FocusEvent<HTMLTextAreaElement>) => {
     console.log("handleFocus", gsid);
-    //setFocus(true);
-    //dispatch(setStore({ tabularRef: tabularRef }));  //Tabular change
+    setFocus(true);
+    dispatch(setStore({ tabularRef: tabularRef }));  //Tabular change
   };
 
   const handleBlur = (e: React.FocusEvent<HTMLTextAreaElement>) => {
