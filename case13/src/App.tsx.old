@@ -323,45 +323,16 @@ const App = () => {
   //console.log(cells["F12"]);
 
   //style={{ width: 800 }}
-  const [split, setSplit] = createSignal(false);
-  const [split_ratio, setSplitRatio] = createSignal([100,100,100]);
-  function panel_split_toggle() {
-      const v  = document.querySelector("#ratio_v").value;
-      const h1 = document.querySelector("#ratio_h1").value;
-      const h2 = document.querySelector("#ratio_h2").value;
-      //split_ratio = [ v , h1, h2 ]
-      setSplitRatio([ v , h1, h2 ])
-      console.log("panel_split_toggle", split_ratio);
-      //console.log("panel_split_toggle");
-      setSplit(!split());
-      console.log("split_toggle:", split());
-  }
 
-  //let  split_ratio = [50, 40, 100]
-  //let  split_ratio = [100, 100, 100]
-/*
-      <div class="grid-container" style="height: 650px;  width:1400px;">
-      <div class="grid-container" style="height: 100vh;  width:100vw;">
-*/
   return (
     <main>
       <br />
-
-      <button onClick={() => panel_split_toggle()}>PANEL SPLIT: {split()? "+" : "-"}</button>
-      <label  style="margin:0px 4px 0px 42px;"> ratio </label>
-      <input id="ratio_v"   type="number" style="width:60px; margin:0px 4px; text-align: center;" value="50" />
-      <input id="ratio_h1"  type="number" style="width:60px; margin:0px 4px; text-align: center;" value="50" />
-      <input id="ratio_h2"  type="number" style="width:60px; margin:0px 4px; text-align: center;" value="50" />
-
-
-      <br />
       <br />
 
-      <div class="grid-container" style="height: 650px;  width:1400px;" >
+      <div class="grid-container" style="height: 650px;  width:1400px;">
         <GridSheetPassive
-	  table_name="TABLE-01"
-	  panel_split={split}
-          split_ratio={split_ratio}
+	  gsid="TABLE-01"
+	  panel_split={true}
 	  syncScroll={syncScroll}
 	  key={keyA}
           hub={hub}

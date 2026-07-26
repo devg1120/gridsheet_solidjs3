@@ -12,6 +12,8 @@ import {
 
 import type { CellsByAddressType } from "../react-core/src/types";
 import { createSignal, createEffect, on, mergeProps } from "solid-js";
+import { Portal } from "solid-js/web";
+import { Modal } from './Modal';
 
 function colNumToId(colNum: number): string {
   let columnName = "";
@@ -53,11 +55,11 @@ const App = () => {
     onInit: ({ table }) => {
       console.log(`hub Table initialized: ${table.sheetName}`);
     },
-    onEdit: ({ table, gsid }) => {
-      console.log(`hub Table edit: [${gsid}] ${table.sheetName}`);
-      if ( gsid == "TABLE-A" ) {
+    onEdit: ({ table, id }) => {
+      console.log(`hub Table edit: [${id}] ${table.sheetName}`);
+      if ( id == "TABLE-A" ) {
           setKeyB(keyB() + 1);
-      } else if ( gsid == "TABLE-B" ) {
+      } else if ( id == "TABLE-B" ) {
           setKeyA(keyA() + 1);
       }
     },
@@ -337,32 +339,47 @@ const App = () => {
       console.log("split_toggle:", split());
   }
 
+  const [clone, setClone] = createSignal(false);
+  function panel_clone_toggle() {
+      //console.log("panel_split_toggle");
+      setClone(!clone());
+      console.log("clone_toggle:", clone());
+  }
   //let  split_ratio = [50, 40, 100]
   //let  split_ratio = [100, 100, 100]
 /*
       <div class="grid-container" style="height: 650px;  width:1400px;">
       <div class="grid-container" style="height: 100vh;  width:100vw;">
 */
+  const [isOpen, setIsOpen] = createSignal(false);
+
   return (
     <main>
       <br />
 
-      <button onClick={() => panel_split_toggle()}>PANEL SPLIT: {split()? "+" : "-"}</button>
+      <button style="margin:0px 4px; " onClick={() => panel_split_toggle()}>PANEL SPLIT: {split()? "+" : "-"}</button>
       <label  style="margin:0px 4px 0px 42px;"> ratio </label>
       <input id="ratio_v"   type="number" style="width:60px; margin:0px 4px; text-align: center;" value="50" />
       <input id="ratio_h1"  type="number" style="width:60px; margin:0px 4px; text-align: center;" value="50" />
       <input id="ratio_h2"  type="number" style="width:60px; margin:0px 4px; text-align: center;" value="50" />
 
+      <button style="margin:0px 12px; " onClick={() => panel_clone_toggle()}>CLONE: {clone()? "+" : "-"}</button>
+      <button 
+        onClick={() => setIsOpen(true)}
+      >
+        モーダル
+      </button>
 
       <br />
       <br />
 
-      <div class="grid-container" style="height: 650px;  width:1400px;" >
+      <div class="grid-container" style="height: 650px;  width:1400px;">
         <GridSheetPassive
-	  table_name="TABLE-01"
+	  //table_name="TABLE-01"
+	  table_name="TABLE-A"
 	  panel_split={split}
           split_ratio={split_ratio}
-	  syncScroll={syncScroll}
+	  //syncScroll={syncScroll}
 	  key={keyA}
           hub={hub}
           table={table()}
@@ -377,11 +394,15 @@ const App = () => {
           //style={{ width: 800, height: 300 }}
           //
         />
-        <br />
-{/*       
+        </div>
+
+      <Show when={clone()} >
+      <div class="grid-container" 
+              style="height: 650px;  width:1400px;">
+       
                 <GridSheetPassive
-	            gsid="TABLE-B"
-	  syncScroll={syncScroll}
+	            table_name="TABLE-B"
+	  //syncScroll={syncScroll}
 	  key={keyB}
                     hub={hub}
                     table={table()}
@@ -394,9 +415,31 @@ const App = () => {
                 />
 
 
-        <br />
-*/}
       </div>
+      </Show>
+
+      <Modal isOpen={isOpen()} onClose={() => setIsOpen(false)}>
+
+      <div class="grid-container" 
+              style="height: 650px;  width:1400px;">
+       
+                <GridSheetPassive
+	            table_name="TABLE-C"
+	  //syncScroll={syncScroll}
+	  key={keyB}
+                    hub={hub}
+                    table={table()}
+                    //initialCells={ cells }
+                    options={
+                        {}
+                    }
+                    sheetName="Sheet1"
+                //style={{ width: 800, height: 300 }}
+                />
+
+
+      </div>
+      </Modal>
 
       <div class="labeler-control">
         <label>
