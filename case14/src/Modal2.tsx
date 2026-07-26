@@ -63,8 +63,8 @@ export function Modal2(props: ModalProps) {
                         : "parent" 
                 }
 		*/
-                //boundary="window"
-                boundary="parent"
+                boundary="window"
+                //boundary="parent"
                 //dragHandle={handleEnabled() ? ".handle" : undefined}
                 dragHandle=".handle"
                 classWhileDragging="currentlyDragging"
