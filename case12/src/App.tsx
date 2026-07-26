@@ -53,13 +53,13 @@ const App = () => {
     onInit: ({ table }) => {
       console.log(`hub Table initialized: ${table.sheetName}`);
     },
-    onEdit: ({ table, gsid }) => {
-      console.log(`hub Table edit: [${gsid}] ${table.sheetName}`);
-     // if ( gsid == "TABLE-A" ) {
+    onEdit: ({ table, id }) => {
+      console.log(`hub Table edit: [${id}] ${table.sheetName}`);
+      if ( id == "TABLE-A" ) {
           setKeyB(keyB() + 1);
-      //} else if ( gsid == "TABLE-B" ) {
+      } else if ( id == "TABLE-B" ) {
           setKeyA(keyA() + 1);
-      //}
+      }
     },
     /*
     onKeyUp: ({ e, point }) => {

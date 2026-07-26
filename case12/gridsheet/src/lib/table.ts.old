@@ -1251,7 +1251,7 @@ export class Table implements UserTable {
     operator = "SYSTEM",
     operation: op = operation.Update,
     formulaIdentify = true,
-    mainid,
+    gsid,
   }: {
     diff: CellsByAddressType;
     partial?: boolean;
@@ -1260,10 +1260,10 @@ export class Table implements UserTable {
     operator?: OperatorType;
     operation?: OperationType;
     formulaIdentify?: boolean;
-    mainid?: string;
+    gsid?: string;
   }) {
 
-    //console.log("table update", mainid)
+    //console.log("table update", gsid)
 
     const diffBefore: CellsByIdType = {};
     const diffAfter: CellsByIdType = {};
@@ -1354,8 +1354,8 @@ export class Table implements UserTable {
     // Call onEdit with cloned table containing updated area
     if (this.wire.onEdit && Object.keys(diff).length > 0) {
       const updatedArea = this.getUpdatedArea(diff);
-      //this.wire.onEdit({ table: this.__raw__.trim(updatedArea) , mainid: mainid});  // GUSA
-      this.wire.onEdit({ table: this.__raw__.trim(updatedArea) , id: mainid});  // GUSA
+      //this.wire.onEdit({ table: this.__raw__.trim(updatedArea) , gsid: gsid});  // GUSA
+      this.wire.onEdit({ table: this.__raw__.trim(updatedArea) , id: gsid});  // GUSA
     }
     //this.clearSolvedCaches();
     return {
@@ -1374,7 +1374,7 @@ export class Table implements UserTable {
     operation: op = operation.Update,
     undoReflection,
     redoReflection,
-    mainid,
+    gsid,
   }: {
     diff: CellsByAddressType;
     partial?: boolean;
@@ -1384,7 +1384,7 @@ export class Table implements UserTable {
     operation?: OperationType;
     undoReflection?: StorePatchType;
     redoReflection?: StorePatchType;
-    mainid?: string;
+    gsid?: string;
   }) {
     //console.trace("update")
     const { diffBefore, diffAfter, resized } = this._update({
@@ -1393,7 +1393,7 @@ export class Table implements UserTable {
       operator,
       operation: op,
       updateChangedAt,
-      mainid,
+      gsid,
     });
 
     if (historicize) {
@@ -1491,9 +1491,9 @@ export class Table implements UserTable {
     operator?: OperatorType;
     undoReflection?: StorePatchType;
     redoReflection?: StorePatchType;
-    mainid?: string;
+    gsid?: string;
   }) {
-    const { point, value , mainid } = props;
+    const { point, value , gsid } = props;
     const parsed = this.parse(point, value ?? "");
     const current = this.getCellByPoint(point, "RAW");
     if (current?.value === parsed.value) {
@@ -1501,14 +1501,13 @@ export class Table implements UserTable {
       return this;
     }
     const diff = { [p2a(point)]: parsed };
-    //console.log("table.write", mainid)
     return this.update({
       ...props,
       diff,
       partial: true,
       operation: operation.Write,
-      //mainid: "__XXXX__",
-      mainid: mainid,
+      //gsid: "__XXXX__",
+      gsid: gsid,
     });
   }
 

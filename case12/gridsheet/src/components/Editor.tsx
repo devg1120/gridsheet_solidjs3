@@ -225,12 +225,13 @@ export const Editor: Component<Props> = ({ mode }: Props) => {
 
   const selectValue = (selected: number) => {
     const option = filteredOptions[selected];
-    console.log("setValue", mainRef.id)
+    //console.log("setValue", mainRef.id)
     if (option) {
       const t = table.update({
         diff: { [address()]: { value: option.value } },
         partial: true,
-	gsid: mainRef.id
+	//gsid: mainRef.id
+	mainid: mainRef.id
       });
       dispatch(updateTable(t.clone()));
       dispatch(setEditingAddress(""));
@@ -259,9 +260,9 @@ export const Editor: Component<Props> = ({ mode }: Props) => {
 
   const writeCell = (value: string) => {
      //console.log("witeCell", mainRef.id);
-     const gsid = mainRef.id;
+     const mainid = mainRef.id;
     if (before !== value) {
-      dispatch(write({ value, gsid }));
+      dispatch(write({ value, mainid }));
     }
     setBefore(value);
   };

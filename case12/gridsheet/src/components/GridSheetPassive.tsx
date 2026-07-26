@@ -323,8 +323,8 @@ if (panel_split()) {
     embedStyle(); 
     dispatch(setStore({ mainRef: mainRef }));
     setLoading(false);
-    console.log("mainRef", mainRef.offsetWidth)
-    console.log("mainRef", mainRef.offsetHeight)
+    //console.log("mainRef", mainRef.offsetWidth)
+    //console.log("mainRef", mainRef.offsetHeight)
     
     set_c11_width( mainRef.offsetWidth -2)
     //set_c12_width( 0 )
@@ -533,7 +533,7 @@ const h_resize = (id, size) => {
         <div
           class={`gs-main ${className || ""}`}
           ref={mainRef}
-
+          id={table_name}
           //style="height: 600px;  width:1000px;"
           style="height: calc(100% - 25px) ;  width:100%;"         //MAIN SIZE
           //style="height: 400px;  width:800px;"

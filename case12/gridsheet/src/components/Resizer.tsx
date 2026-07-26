@@ -28,6 +28,7 @@ export const Resizer = () => {
     mainRef,
   } = store();
 
+  //console.log("start------------------", mainRef)
   //console.log("start------------------", mainRef.id)
   const table = tableRef;
 
@@ -137,7 +138,8 @@ export const Resizer = () => {
       partial: true,
       operator: "USER",
       undoReflection: { selectingZone, sheetId: table.sheetId },
-      gsid: mainRef.id
+      //gsid: mainRef.id
+      mainid: mainRef.id
     });
     dispatch(
       setStore({
